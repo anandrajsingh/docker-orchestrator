@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +22,13 @@
   },
   "homepage": "https://github.com/anandrajsingh/docker-orchestrator#readme",
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@types/node": "^24.7.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "ts-node-dev": "^2.0.0"
   }
 }
