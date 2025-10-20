@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
     res.json({ working: true })
 })
 
-app.get('/list', async (req, res) => {
+app.get('/container/list', async (req, res) => {
     try {
         const containers = await docker.listContainers({ all: false })
         res.json(containers)
@@ -18,18 +18,8 @@ app.get('/list', async (req, res) => {
     }
 })
 
-app.get('/container/:id', async (req, res) => {
-    const containerId = req.params.id
-    try {
-        const container = docker.getContainer(containerId)
-        const data = await container.inspect()
-        res.json(data)
-    } catch (error) {
-        res.status(500).json(error)
-    }
-})
 
-app.post('/container-new', async (req, res) => {
+app.post('/container/create', async (req, res) => {
     const body = req.body;
     try {
         const container: Container = await docker.createContainer(body)
@@ -44,11 +34,22 @@ app.post('/container-new', async (req, res) => {
     }
 })
 
-app.post('/run/container', async(req, res) => {
+app.post('/container/run', async(req, res) => {
     const body = req.body;
 
     try {
         
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+app.get('/container/:id', async (req, res) => {
+    const containerId = req.params.id
+    try {
+        const container = docker.getContainer(containerId)
+        const data = await container.inspect()
+        res.json(data)
     } catch (error) {
         res.status(500).json(error)
     }
